@@ -26,7 +26,7 @@ jobs:
         
       - name: Clone source code
         run: |
-          git clone -b 20221001 https://github.com/coolsnowwolf/lede
+          git clone https://github.com/coolsnowwolf/lede
           
       - name: Update feeds
         run: |
