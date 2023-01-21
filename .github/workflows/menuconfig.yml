@@ -31,10 +31,13 @@ jobs:
         
       - name: Make menuconfig
         uses: P3TERX/ssh2actions@main
+      
+      - name: Move config
+        run: cp ./lede/.config .
         
-      - name: Deliver config
-        uses: actions/upload-artifact@v2
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
         with:
-          name: OpenWrt_buildinfo
-          path: ./lede/.config
-        
+          file-path: ./.config
+          commit-msg: Update resources
+          github-token: ${{ secrets.GITHUB_TOKEN }}
