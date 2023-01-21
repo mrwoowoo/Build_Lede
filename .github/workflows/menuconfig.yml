@@ -1,4 +1,4 @@
-name: menuconfig
+name: Generate Config
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -31,13 +31,19 @@ jobs:
         
       - name: Make menuconfig
         uses: P3TERX/ssh2actions@main
-      
-      - name: Move config
-        run: cp ./lede/.config .
         
-      - name: Update resources
-        uses: test-room-7/action-update-file@v1
+      - name: Create local changes
+        run: |
+          cp -rf ./lede/.config ./
+          rm -rf ./lede
+          
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Add changes"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          file-path: ./.config
-          commit-msg: Update resources
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
