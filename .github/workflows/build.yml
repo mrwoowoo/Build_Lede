@@ -26,7 +26,7 @@ jobs:
         
       - name: Clone source code
         run: |
-          git clone -b $(curl -s https://api.github.com/repos/coolsnowwolf/lede/releases/latest | jq '.tag_name') https://github.com/coolsnowwolf/lede
+          git clone -b $(curl -s https://api.github.com/repos/coolsnowwolf/lede/releases/latest | jq -r '.tag_name') https://github.com/coolsnowwolf/lede
           
       - name: Update feeds
         run: |
