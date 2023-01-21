@@ -35,7 +35,7 @@ jobs:
           ./scripts/feeds install -a
         
       - name: Make menuconfig
-        uses: P3TERX/ssh2actions@main
+        run: cp .config lede/
         
       - name: Make download
         run: |
